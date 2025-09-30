@@ -1,295 +1,295 @@
-WRITE_TODOS_TOOL_DESCRIPTION = """Use this tool to create and manage a structured task list for your current work session. This helps you track progress, organize complex tasks, and demonstrate thoroughness to the user.
-It also helps the user understand the progress of the task and overall progress of their requests.
-Only use this tool if you think it will be helpful in staying organized. If the user's request is trivial and takes less than 3 steps, it is better to NOT use this tool and just do the taks directly.
+WRITE_TODOS_TOOL_DESCRIPTION = """使用此工具为当前工作会话创建和管理结构化任务列表。这有助于跟踪进度、组织复杂任务并向用户展示工作的全面性。
+它还帮助用户了解任务进度和请求的整体进展。
+仅在认为有助于保持组织性时使用此工具。如果用户的请求很简单且少于3个步骤，最好不要使用此工具，直接完成任务即可。
 
-## When to Use This Tool
-Use this tool in these scenarios:
+## 何时使用此工具
+在以下场景中使用此工具：
 
-1. Complex multi-step tasks - When a task requires 3 or more distinct steps or actions
-2. Non-trivial and complex tasks - Tasks that require careful planning or multiple operations
-3. User explicitly requests todo list - When the user directly asks you to use the todo list
-4. User provides multiple tasks - When users provide a list of things to be done (numbered or comma-separated)
-5. The plan may need future revisions or updates based on results from the first few steps. Keeping track of this in a list is helpful.
+1. 复杂的多步骤任务 - 当任务需要3个或更多不同的步骤或操作时
+2. 非平凡的复杂任务 - 需要仔细规划或多个操作的任务
+3. 用户明确请求待办事项列表 - 当用户直接要求使用待办事项列表时
+4. 用户提供多个任务 - 当用户提供要完成的事项列表时（编号或逗号分隔）
+5. 计划可能需要根据前几个步骤的结果进行未来修订或更新。在列表中跟踪这些很有帮助。
 
-## How to Use This Tool
-1. When you start working on a task - Mark it as in_progress BEFORE beginning work.
-2. After completing a task - Mark it as completed and add any new follow-up tasks discovered during implementation.
-3. You can also update future tasks, such as deleting them if they are no longer necessary, or adding new tasks that are necessary. Don't change previously completed tasks.
-4. You can make several updates to the todo list at once. For example, when you complete a task, you can mark the next task you need to start as in_progress.
+## 如何使用此工具
+1. 开始处理任务时 - 在开始工作之前将其标记为进行中
+2. 完成任务后 - 将其标记为已完成，并添加在实施过程中发现的任何新后续任务
+3. 您还可以更新未来的任务，例如删除不再必要的任务，或添加必要的新任务。不要更改之前已完成的任务。
+4. 您可以一次对待办事项列表进行多次更新。例如，完成一个任务时，可以将需要开始的下一个任务标记为进行中。
 
-## When NOT to Use This Tool
-It is important to skip using this tool when:
-1. There is only a single, straightforward task
-2. The task is trivial and tracking it provides no benefit
-3. The task can be completed in less than 3 trivial steps
-4. The task is purely conversational or informational
+## 何时不使用此工具
+在以下情况下跳过使用此工具很重要：
+1. 只有一个简单直接的任务
+2. 任务很简单，跟踪它没有任何好处
+3. 任务可以在少于3个简单步骤内完成
+4. 任务纯粹是对话性或信息性的
 
-## Examples of When to Use the Todo List
+## 何时使用待办事项列表的示例
 
 <example>
-User: I want to add a dark mode toggle to the application settings. Make sure you run the tests and build when you're done!
-Assistant: I'll help add a dark mode toggle to your application settings. Let me create a todo list to track this implementation.
-*Creates todo list with the following items:*
-1. Create dark mode toggle component in Settings page
-2. Add dark mode state management (context/store)
-3. Implement CSS-in-JS styles for dark theme
-4. Update existing components to support theme switching
-5. Run tests and build process, addressing any failures or errors that occur
-*Begins working on the first task*
+用户：我想在应用程序设置中添加一个深色模式切换开关。完成后确保运行测试和构建！
+助手：我将帮助您在应用程序设置中添加深色模式切换开关。让我创建一个待办事项列表来跟踪此实现。
+*创建包含以下项目的待办事项列表：*
+1. 在设置页面创建深色模式切换组件
+2. 添加深色模式状态管理（上下文/存储）
+3. 为深色主题实现CSS-in-JS样式
+4. 更新现有组件以支持主题切换
+5. 运行测试和构建过程，解决出现的任何失败或错误
+*开始处理第一个任务*
 
 <reasoning>
-The assistant used the todo list because:
-1. Adding dark mode in it of itself is a multi-step feature requiring UI, state management, and styling changes
-2. The assistant inferred that tests and build need to pass by adding "Ensure tests and build succeed" as the final task
-3. Both of the user's requests are complex and require multiple steps to complete.
+助手使用待办事项列表是因为：
+1. 添加深色模式本身就是一个多步骤功能，需要UI、状态管理和样式更改
+2. 助手推断测试和构建需要通过，因此添加了"确保测试和构建成功"作为最终任务
+3. 用户的两个请求都很复杂，需要多个步骤才能完成。
 </reasoning>
 </example>
 
 <example>
-User: Help me plan a comprehensive marketing campaign for our new product launch, including social media, email marketing, and press releases.
-Assistant: I'll help you plan a comprehensive marketing campaign for your product launch. Let me create a todo list to organize all the components.
-*Creates todo list with the following items:*
-1. Define target audience and key messaging
-2. Create social media content calendar and posting schedule
-3. Design email marketing sequence and automation flows
-4. Draft press release and identify media contacts
-5. Set up tracking and analytics for campaign performance
-6. Create visual assets and brand materials
-7. Coordinate launch timeline and deliverables
-*Begins working on the first task*
+用户：帮我规划一个全面的新产品发布营销活动，包括社交媒体、电子邮件营销和新闻稿。
+助手：我将帮助您规划产品发布的全面营销活动。让我创建一个待办事项列表来组织所有组件。
+*创建包含以下项目的待办事项列表：*
+1. 定义目标受众和关键信息
+2. 创建社交媒体内容日历和发布计划
+3. 设计电子邮件营销序列和自动化流程
+4. 起草新闻稿并确定媒体联系人
+5. 设置活动效果跟踪和分析
+6. 创建视觉资产和品牌材料
+7. 协调发布时间表和交付成果
+*开始处理第一个任务*
 
 <reasoning>
-The assistant used the todo list because:
-1. Marketing campaign planning involves multiple distinct channels and activities
-2. Each component requires careful coordination and planning
-3. The systematic approach ensures all aspects of the launch are covered
+助手使用待办事项列表是因为：
+1. 营销活动规划涉及多个不同的渠道和活动
+2. 每个组件都需要仔细的协调和规划
+3. 系统性方法确保涵盖发布的所有方面
 </reasoning>
 </example>
 
 <example>
-User: Help me rename the function getCwd to getCurrentWorkingDirectory across my project
-Assistant: Let me first search through your codebase to find all occurrences of 'getCwd'.
-*Uses search tools to locate all instances of getCwd in the codebase*
-Assistant: I've found 15 instances of 'getCwd' across 8 different files. Let me create a todo list to track these changes.
-*Creates todo list with specific items for each file that needs updating*
+用户：帮我在项目中将函数 getCwd 重命名为 getCurrentWorkingDirectory
+助手：让我首先搜索代码库以找到所有 'getCwd' 的出现位置。
+*使用搜索工具定位代码库中 getCwd 的所有实例*
+助手：我在8个不同文件中找到了15个 'getCwd' 实例。让我创建一个待办事项列表来跟踪这些更改。
+*创建包含每个需要更新文件的具体项目的待办事项列表*
 
 <reasoning>
-The assistant used the todo list because:
-1. The assistant searched to understand the scope of the task
-2. Upon finding multiple occurrences across different files, it determined this was a complex task with multiple steps (>3)
-3. The todo list helps ensure every instance is tracked and updated systematically
-4. This approach prevents missing any occurrences and maintains consistency.
+助手使用待办事项列表是因为：
+1. 助手搜索以了解任务的范围
+2. 在多个文件中发现多个出现位置后，确定这是一个具有多个步骤（>3）的复杂任务
+3. 待办事项列表有助于确保系统地跟踪和更新每个实例
+4. 这种方法防止遗漏任何出现位置并保持一致性。
 </reasoning>
 </example>
 
 <example>
-User: I need help organizing my home office: decluttering the desk, setting up a filing system, organizing digital files, and creating a daily workflow.
-Assistant: I'll help you organize your home office systematically. Let me create a todo list to track each area of organization.
-*Creates todo list with items like: 1) Sort and declutter desk items, 2) Set up physical filing system for documents, 3) Organize digital files and folders, 4) Create daily workflow and productivity systems, 5) Establish maintenance routines*
-Let's start with decluttering your desk space to create a clean foundation for the other organizational systems.
+用户：我需要帮助整理家庭办公室：整理桌面、建立文件系统、整理数字文件和创建日常工作流程。
+助手：我将系统地帮助您整理家庭办公室。让我创建一个待办事项列表来跟踪每个整理区域。
+*创建包含以下项目的待办事项列表：1）整理和清理桌面物品，2）为文档建立物理文件系统，3）整理数字文件和文件夹，4）创建日常工作流程和生产力系统，5）建立维护例程*
+让我们从整理您的桌面空间开始，为其他组织系统创建一个干净的基础。
 
 <reasoning>
-The assistant used the todo list because:
-1. The user provided multiple distinct organizational tasks
-2. Each area requires different approaches and careful planning
-3. Home organization benefits from systematic, step-by-step completion
-4. Progress tracking ensures all areas are addressed thoroughly
+助手使用待办事项列表是因为：
+1. 用户提供了多个不同的组织任务
+2. 每个区域需要不同的方法和仔细的规划
+3. 家庭整理受益于系统性的逐步完成
+4. 进度跟踪确保所有区域都得到彻底处理
 </reasoning>
 </example>
 
-## Examples of When NOT to Use the Todo List
+## 何时不使用待办事项列表的示例
 
 <example>
-User: How do I print 'Hello World' in Python?
-Assistant: In Python, you can print "Hello World" with this simple code:
+用户：如何在Python中打印'Hello World'？
+助手：在Python中，您可以使用这个简单的代码打印"Hello World"：
 
 python
 print("Hello World")
 
-This will output the text "Hello World" to the console when executed.</assistant>
+执行时，这将向控制台输出文本"Hello World"。
 
 <reasoning>
-The assistant did not use the todo list because this is a single, trivial task that can be completed in one step. There's no need to track multiple tasks or steps for such a straightforward request.
+助手没有使用待办事项列表，因为这是一个可以在一个步骤中完成的单一、简单任务。对于如此直接的请求，没有必要跟踪多个任务或步骤。
 </reasoning>
 </example>
 
 <example>
-User: What's the best way to water houseplants?
-Assistant: The best way to water houseplants depends on the specific plant type, but here are some general guidelines:
+用户：给室内植物浇水的最佳方法是什么？
+助手：给室内植物浇水的最佳方法取决于具体的植物类型，但这里有一些一般准则：
 
-- Check soil moisture by inserting your finger about 1-2 inches into the soil
-- Water thoroughly when the top inch feels dry, allowing water to drain from the bottom
-- Use room temperature water and water in the morning when possible
-- Avoid overwatering, which is more harmful than underwatering for most plants
+- 通过将手指插入土壤约1-2英寸来检查土壤湿度
+- 当表层土壤感觉干燥时彻底浇水，让水从底部排出
+- 尽可能使用室温水并在早晨浇水
+- 避免过度浇水，对大多数植物来说这比浇水不足更有害
 
-Different plants have different needs, so it's important to research your specific varieties for optimal care.
+不同的植物有不同的需求，因此研究您的特定品种以获得最佳护理很重要。
 
 <reasoning>
-The assistant did not use the todo list because this is an informational request with no actual tasks to complete. The user is simply asking for advice and explanation, not for the assistant to perform multiple steps or activities.
+助手没有使用待办事项列表，因为这是一个信息性请求，没有实际任务要完成。用户只是在寻求建议和解释，而不是要求助手执行多个步骤或活动。
 </reasoning>
 </example>
 
 <example>
-User: Can you add a comment to the calculateTotal function to explain what it does?
-Assistant: Sure, let me add a comment to the calculateTotal function to explain what it does.
-* Uses the Edit tool to add a comment to the calculateTotal function *
+用户：你能给 calculateTotal 函数添加一个注释来解释它的作用吗？
+助手：当然，让我给 calculateTotal 函数添加一个注释来解释它的作用。
+* 使用编辑工具给 calculateTotal 函数添加注释 *
 
 <reasoning>
-The assistant did not use the todo list because this is a single, straightforward task confined to one location. Adding a comment doesn't require tracking multiple steps or systematic organization.
+助手没有使用待办事项列表，因为这是一个局限于一个位置的单一、直接的任务。添加注释不需要跟踪多个步骤或系统性组织。
 </reasoning>
 </example>
 
 <example>
-User: What time is it in Tokyo right now?
-Assistant: I'll check the current time in Tokyo for you.
+用户：现在东京是几点？
+助手：我来为您查询东京的当前时间。
 
-*Searches for current time in Tokyo*
+*搜索东京当前时间*
 
-The current time in Tokyo, Japan is [current time]. Tokyo is in the Japan Standard Time (JST) zone, which is UTC+9.
+日本东京的当前时间是[当前时间]。东京位于日本标准时间（JST）时区，即UTC+9。
 
 <reasoning>
-The assistant did not use the todo list because this is a single information lookup with immediate results. There are no multiple steps to track or organize, making the todo list unnecessary for this straightforward request.
+助手没有使用待办事项列表，因为这是一个有即时结果的单一信息查询。没有多个步骤需要跟踪或组织，使得待办事项列表对这种直接请求来说是不必要的。
 </reasoning>
 </example>
 
 <example>
-User: I need to write a function that checks if a number is prime and then test it out.
-Assistant: I'll help you write a function that checks if a number is prime and then test it out.
-*Writes function that checks if a number is prime*
-*Tests the function*
+用户：我需要写一个检查数字是否为质数的函数，然后测试它。
+助手：我将帮助您编写一个检查数字是否为质数的函数，然后测试它。
+*编写检查数字是否为质数的函数*
+*测试函数*
 
 <reasoning>
-Even though this is a multi-step task, it is very straightforward and can be completed in two trivial steps (which is less than 3 steps!). Using the todo list here is overkill and wastes time and tokens.
+尽管这是一个多步骤任务，但它非常直接，可以在两个简单步骤中完成（少于3个步骤！）。在这里使用待办事项列表是过度的，浪费时间和令牌。
 </reasoning>
 </example>
 
 <example>
-User: I want you to order a pizza from Dominos, order a burger from McDonald's, and order a salad from Subway.
-Assistant: I'll help you order a pizza from Dominos, order a burger from McDonald's, and order a salad from Subway.
-*Orders a pizza from Dominos*
-*Orders a burger from McDonald's*
-*Orders a salad from Subway*
+用户：我想让你从达美乐订一个披萨，从麦当劳订一个汉堡，从赛百味订一个沙拉。
+助手：我将帮助您从达美乐订一个披萨，从麦当劳订一个汉堡，从赛百味订一个沙拉。
+*从达美乐订披萨*
+*从麦当劳订汉堡*
+*从赛百味订沙拉*
 
 <reasoning>
-Even though this is a multi-step task, assuming the assistant has the ability to order from these restaurants, it is very straightforward and can be completed in three trivial tool calls. 
-Using the todo list here is overkill and wastes time and tokens. These three tool calls should be made in parallel, in fact.
+尽管这是一个多步骤任务，但假设助手有能力从这些餐厅订餐，它非常直接，可以通过三个简单的工具调用完成。
+在这里使用待办事项列表是过度的，浪费时间和令牌。实际上，这三个工具调用应该并行进行。
 </reasoning>
 </example>
 
 
-## Task States and Management
+## 任务状态和管理
 
-1. **Task States**: Use these states to track progress:
-   - pending: Task not yet started
-   - in_progress: Currently working on (you can have multiple tasks in_progress at a time if they are not related to each other and can be run in parallel)
-   - completed: Task finished successfully
+1. **任务状态**：使用这些状态来跟踪进度：
+   - pending（待处理）：任务尚未开始
+   - in_progress（进行中）：当前正在处理（如果任务彼此无关且可以并行运行，您可以同时有多个进行中的任务）
+   - completed（已完成）：任务成功完成
 
-2. **Task Management**:
-   - Update task status in real-time as you work
-   - Mark tasks complete IMMEDIATELY after finishing (don't batch completions)
-   - Complete current tasks before starting new ones
-   - Remove tasks that are no longer relevant from the list entirely
-   - IMPORTANT: When you write this todo list, you should mark your first task (or tasks) as in_progress immediately!.
-   - IMPORTANT: Unless all tasks are completed, you should always have at least one task in_progress to show the user that you are working on something.
+2. **任务管理**：
+   - 在工作时实时更新任务状态
+   - 完成后立即标记任务为完成（不要批量完成）
+   - 在开始新任务之前完成当前任务
+   - 完全从列表中删除不再相关的任务
+   - 重要：当您编写此待办事项列表时，应该立即将第一个任务（或多个任务）标记为进行中！
+   - 重要：除非所有任务都已完成，否则您应该始终至少有一个进行中的任务，以向用户显示您正在处理某些事情。
 
-3. **Task Completion Requirements**:
-   - ONLY mark a task as completed when you have FULLY accomplished it
-   - If you encounter errors, blockers, or cannot finish, keep the task as in_progress
-   - When blocked, create a new task describing what needs to be resolved
-   - Never mark a task as completed if:
-     - There are unresolved issues or errors
-     - Work is partial or incomplete
-     - You encountered blockers that prevent completion
-     - You couldn't find necessary resources or dependencies
-     - Quality standards haven't been met
+3. **任务完成要求**：
+   - 仅在完全完成任务时才将其标记为已完成
+   - 如果遇到错误、阻塞或无法完成，请保持任务为进行中状态
+   - 被阻塞时，创建一个新任务描述需要解决的问题
+   - 在以下情况下永远不要将任务标记为已完成：
+     - 存在未解决的问题或错误
+     - 工作是部分的或不完整的
+     - 您遇到了阻止完成的障碍
+     - 您找不到必要的资源或依赖项
+     - 质量标准未达到
 
-4. **Task Breakdown**:
-   - Create specific, actionable items
-   - Break complex tasks into smaller, manageable steps
-   - Use clear, descriptive task names
+4. **任务分解**：
+   - 创建具体的、可操作的项目
+   - 将复杂任务分解为更小的、可管理的步骤
+   - 使用清晰、描述性的任务名称
 
-Being proactive with task management demonstrates attentiveness and ensures you complete all requirements successfully
-Remember: If you only need to make a few tool calls to complete a task, and it is clear what you need to do, it is better to just do the task directly and NOT call this tool at all.
+主动进行任务管理展示了专注性，并确保您成功完成所有要求
+记住：如果您只需要进行几次工具调用来完成任务，并且清楚需要做什么，最好直接完成任务而不要调用此工具。
 """
 
-TASK_TOOL_DESCRIPTION = """Launch an ephemeral subagent to handle complex, multi-step independent tasks with isolated context windows. 
+TASK_TOOL_DESCRIPTION = """启动一个临时子代理来处理具有隔离上下文窗口的复杂、多步骤独立任务。
 
-Available agent types and the tools they have access to:
-- general-purpose: General-purpose agent for researching complex questions, searching for files and content, and executing multi-step tasks. When you are searching for a keyword or file and are not confident that you will find the right match in the first few tries use this agent to perform the search for you. This agent has access to all tools as the main agent.
+可用的代理类型及其可访问的工具：
+- general-purpose（通用）：用于研究复杂问题、搜索文件和内容以及执行多步骤任务的通用代理。当您搜索关键词或文件且不确定在前几次尝试中能找到正确匹配时，请使用此代理为您执行搜索。此代理可访问与主代理相同的所有工具。
 {other_agents}
 
-When using the Task tool, you must specify a subagent_type parameter to select which agent type to use.
+使用任务工具时，必须指定 subagent_type 参数来选择要使用的代理类型。
 
-## Usage notes:
-1. Launch multiple agents concurrently whenever possible, to maximize performance; to do that, use a single message with multiple tool uses
-2. When the agent is done, it will return a single message back to you. The result returned by the agent is not visible to the user. To show the user the result, you should send a text message back to the user with a concise summary of the result.
-3. Each agent invocation is stateless. You will not be able to send additional messages to the agent, nor will the agent be able to communicate with you outside of its final report. Therefore, your prompt should contain a highly detailed task description for the agent to perform autonomously and you should specify exactly what information the agent should return back to you in its final and only message to you.
-4. The agent's outputs should generally be trusted
-5. Clearly tell the agent whether you expect it to create content, perform analysis, or just do research (search, file reads, web fetches, etc.), since it is not aware of the user's intent
-6. If the agent description mentions that it should be used proactively, then you should try your best to use it without the user having to ask for it first. Use your judgement.
-7. When only the general-purpose agent is provided, you should use it for all tasks. It is great for isolating context and token usage, and completing specific, complex tasks, as it has all the same capabilities as the main agent.
+## 使用说明：
+1. 尽可能同时启动多个代理以最大化性能；为此，在单个消息中使用多个工具调用
+2. 代理完成后，将向您返回单个消息。代理返回的结果对用户不可见。要向用户显示结果，您应该向用户发送包含结果简洁摘要的文本消息。
+3. 每个代理调用都是无状态的。您将无法向代理发送额外消息，代理也无法在其最终报告之外与您通信。因此，您的提示应包含代理自主执行的高度详细的任务描述，并且您应该明确指定代理应在其最终且唯一的消息中返回给您什么信息。
+4. 代理的输出通常应该被信任
+5. 明确告诉代理您期望它创建内容、执行分析还是仅进行研究（搜索、文件读取、网络获取等），因为它不知道用户的意图
+6. 如果代理描述提到应该主动使用它，那么您应该尽力在用户不必首先要求的情况下使用它。运用您的判断。
+7. 当仅提供通用代理时，您应该将其用于所有任务。它非常适合隔离上下文和令牌使用，并完成特定的复杂任务，因为它具有与主代理相同的所有功能。
 
-### Example usage of the general-purpose agent:
+### 通用代理的示例用法：
 
 <example_agent_descriptions>
-"general-purpose": use this agent for general purpose tasks, it has access to all tools as the main agent.
+"general-purpose"（通用）：将此代理用于通用任务，它可以访问与主代理相同的所有工具。
 </example_agent_descriptions>
 
 <example>
-User: "I want to conduct research on the accomplishments of Lebron James, Michael Jordan, and Kobe Bryant, and then compare them."
-Assistant: *Uses the task tool in parallel to conduct isolated research on each of the three players*
-Assistant: *Synthesizes the results of the three isolated research tasks and responds to the User*
+用户："我想研究勒布朗·詹姆斯、迈克尔·乔丹和科比·布莱恩特的成就，然后比较他们。"
+助手：*并行使用任务工具对三名球员分别进行独立研究*
+助手：*综合三个独立研究任务的结果并回应用户*
 <commentary>
-Research is a complex, multi-step task in it of itself.
-The research of each individual player is not dependent on the research of the other players.
-The assistant uses the task tool to break down the complex objective into three isolated tasks.
-Each research task only needs to worry about context and tokens about one player, then returns synthesized information about each player as the Tool Result.
-This means each research task can dive deep and spend tokens and context deeply researching each player, but the final result is synthesized information, and saves us tokens in the long run when comparing the players to each other.
+研究本身就是一个复杂的多步骤任务。
+每个球员的研究不依赖于其他球员的研究。
+助手使用任务工具将复杂目标分解为三个独立任务。
+每个研究任务只需要关注一个球员的上下文和令牌，然后返回每个球员的综合信息作为工具结果。
+这意味着每个研究任务可以深入研究每个球员并花费令牌和上下文，但最终结果是综合信息，从长远来看，在比较球员时为我们节省了令牌。
 </commentary>
 </example>
 
 <example>
-User: "Analyze a single large code repository for security vulnerabilities and generate a report."
-Assistant: *Launches a single `task` subagent for the repository analysis*
-Assistant: *Receives report and integrates results into final summary*
+用户："分析一个大型代码仓库的安全漏洞并生成报告。"
+助手：*为仓库分析启动单个 `task` 子代理*
+助手：*接收报告并将结果整合到最终摘要中*
 <commentary>
-Subagent is used to isolate a large, context-heavy task, even though there is only one. This prevents the main thread from being overloaded with details.
-If the user then asks followup questions, we have a concise report to reference instead of the entire history of analysis and tool calls, which is good and saves us time and money.
+子代理用于隔离大型、上下文繁重的任务，即使只有一个任务。这防止主线程被细节过载。
+如果用户随后提出后续问题，我们有一个简洁的报告可以参考，而不是整个分析和工具调用的历史，这很好，为我们节省了时间和金钱。
 </commentary>
 </example>
 
 <example>
-User: "Schedule two meetings for me and prepare agendas for each."
-Assistant: *Calls the task tool in parallel to launch two `task` subagents (one per meeting) to prepare agendas*
-Assistant: *Returns final schedules and agendas*
+用户："为我安排两个会议并为每个会议准备议程。"
+助手：*并行调用任务工具启动两个 `task` 子代理（每个会议一个）来准备议程*
+助手：*返回最终的时间表和议程*
 <commentary>
-Tasks are simple individually, but subagents help silo agenda preparation.
-Each subagent only needs to worry about the agenda for one meeting.
+任务单独来看很简单，但子代理有助于隔离议程准备。
+每个子代理只需要关心一个会议的议程。
 </commentary>
 </example>
 
 <example>
-User: "I want to order a pizza from Dominos, order a burger from McDonald's, and order a salad from Subway."
-Assistant: *Calls tools directly in parallel to order a pizza from Dominos, a burger from McDonald's, and a salad from Subway*
+用户："我想从达美乐订一个披萨，从麦当劳订一个汉堡，从赛百味订一个沙拉。"
+助手：*直接并行调用工具从达美乐订披萨，从麦当劳订汉堡，从赛百味订沙拉*
 <commentary>
-The assistant did not use the task tool because the objective is super simple and clear and only requires a few trivial tool calls.
-It is better to just complete the task directly and NOT use the `task`tool.
+助手没有使用任务工具，因为目标非常简单明确，只需要几个简单的工具调用。
+最好直接完成任务而不使用 `task` 工具。
 </commentary>
 </example>
 
-### Example usage with custom agents:
+### 自定义代理的示例用法：
 
 <example_agent_descriptions>
-"content-reviewer": use this agent after you are done creating significant content or documents
-"greeting-responder": use this agent when to respond to user greetings with a friendly joke
-"research-analyst": use this agent to conduct thorough research on complex topics
+"content-reviewer"（内容审查员）：在完成创建重要内容或文档后使用此代理
+"greeting-responder"（问候回应者）：当需要用友好的笑话回应用户问候时使用此代理
+"research-analyst"（研究分析师）：使用此代理对复杂主题进行深入研究
 </example_agent_description>
 
 <example>
-user: "Please write a function that checks if a number is prime"
-assistant: Sure let me write a function that checks if a number is prime
-assistant: First let me use the Write tool to write a function that checks if a number is prime
-assistant: I'm going to use the Write tool to write the following code:
+用户："请写一个检查数字是否为质数的函数"
+助手：当然，让我写一个检查数字是否为质数的函数
+助手：首先让我使用写入工具来写一个检查数字是否为质数的函数
+助手：我将使用写入工具编写以下代码：
 <code>
 function isPrime(n) {{
   if (n <= 1) return false
@@ -300,117 +300,117 @@ function isPrime(n) {{
 }}
 </code>
 <commentary>
-Since significant content was created and the task was completed, now use the content-reviewer agent to review the work
+由于创建了重要内容并且任务已完成，现在使用内容审查员代理来审查工作
 </commentary>
-assistant: Now let me use the content-reviewer agent to review the code
-assistant: Uses the Task tool to launch with the content-reviewer agent 
+助手：现在让我使用内容审查员代理来审查代码
+助手：使用任务工具启动内容审查员代理
 </example>
 
 <example>
-user: "Can you help me research the environmental impact of different renewable energy sources and create a comprehensive report?"
+用户："你能帮我研究不同可再生能源的环境影响并创建一份综合报告吗？"
 <commentary>
-This is a complex research task that would benefit from using the research-analyst agent to conduct thorough analysis
+这是一个复杂的研究任务，使用研究分析师代理进行深入分析会很有益
 </commentary>
-assistant: I'll help you research the environmental impact of renewable energy sources. Let me use the research-analyst agent to conduct comprehensive research on this topic.
-assistant: Uses the Task tool to launch with the research-analyst agent, providing detailed instructions about what research to conduct and what format the report should take
+助手：我将帮助您研究可再生能源的环境影响。让我使用研究分析师代理对这个主题进行全面研究。
+助手：使用任务工具启动研究分析师代理，提供关于要进行什么研究以及报告应采用什么格式的详细说明
 </example>
 
 <example>
-user: "Hello"
+用户："你好"
 <commentary>
-Since the user is greeting, use the greeting-responder agent to respond with a friendly joke
+由于用户在问候，使用问候回应者代理用友好的笑话回应
 </commentary>
-assistant: "I'm going to use the Task tool to launch with the greeting-responder agent"
+助手："我将使用任务工具启动问候回应者代理"
 </example>"""
 
-LIST_FILES_TOOL_DESCRIPTION = """Lists all files in the local filesystem.
+LIST_FILES_TOOL_DESCRIPTION = """列出本地文件系统中的所有文件。
 
-Usage:
-- The list_files tool will return a list of all files in the local filesystem.
-- This is very useful for exploring the file system and finding the right file to read or edit.
-- You should almost ALWAYS use this tool before using the Read or Edit tools."""
+用法：
+- list_files 工具将返回本地文件系统中所有文件的列表。
+- 这对于探索文件系统和找到要读取或编辑的正确文件非常有用。
+- 在使用读取或编辑工具之前，您几乎总是应该使用此工具。"""
 
-READ_FILE_TOOL_DESCRIPTION = """Reads a file from the local filesystem. You can access any file directly by using this tool.
-Assume this tool is able to read all files on the machine. If the User provides a path to a file assume that path is valid. It is okay to read a file that does not exist; an error will be returned.
+READ_FILE_TOOL_DESCRIPTION = """从本地文件系统读取文件。您可以使用此工具直接访问任何文件。
+假设此工具能够读取机器上的所有文件。如果用户提供文件路径，假设该路径有效。读取不存在的文件是可以的；将返回错误。
 
-Usage:
-- The file_path parameter must be an absolute path, not a relative path
-- By default, it reads up to 2000 lines starting from the beginning of the file
-- You can optionally specify a line offset and limit (especially handy for long files), but it's recommended to read the whole file by not providing these parameters
-- Any lines longer than 2000 characters will be truncated
-- Results are returned using cat -n format, with line numbers starting at 1
-- You have the capability to call multiple tools in a single response. It is always better to speculatively read multiple files as a batch that are potentially useful. 
-- If you read a file that exists but has empty contents you will receive a system reminder warning in place of file contents.
-- You should ALWAYS make sure a file has been read before editing it."""
+用法：
+- file_path 参数必须是绝对路径，而不是相对路径
+- 默认情况下，从文件开头读取最多 2000 行
+- 您可以选择指定行偏移量和限制（对长文件特别有用），但建议通过不提供这些参数来读取整个文件
+- 任何超过 2000 个字符的行将被截断
+- 结果使用 cat -n 格式返回，行号从 1 开始
+- 您有能力在单个响应中调用多个工具。推测性地批量读取可能有用的多个文件总是更好的。
+- 如果您读取存在但内容为空的文件，您将收到系统提醒警告而不是文件内容。
+- 在编辑文件之前，您应该始终确保已读取文件。"""
 
-EDIT_FILE_TOOL_DESCRIPTION = """Performs exact string replacements in files. 
+EDIT_FILE_TOOL_DESCRIPTION = """在文件中执行精确的字符串替换。
 
-Usage:
-- You must use your `Read` tool at least once in the conversation before editing. This tool will error if you attempt an edit without reading the file. 
-- When editing text from Read tool output, ensure you preserve the exact indentation (tabs/spaces) as it appears AFTER the line number prefix. The line number prefix format is: spaces + line number + tab. Everything after that tab is the actual file content to match. Never include any part of the line number prefix in the old_string or new_string.
-- ALWAYS prefer editing existing files. NEVER write new files unless explicitly required.
-- Only use emojis if the user explicitly requests it. Avoid adding emojis to files unless asked.
-- The edit will FAIL if `old_string` is not unique in the file. Either provide a larger string with more surrounding context to make it unique or use `replace_all` to change every instance of `old_string`. 
-- Use `replace_all` for replacing and renaming strings across the file. This parameter is useful if you want to rename a variable for instance."""
+用法：
+- 在编辑之前，您必须在对话中至少使用一次 `Read` 工具。如果您尝试在不读取文件的情况下进行编辑，此工具将出错。
+- 从读取工具输出编辑文本时，确保保持行号前缀之后显示的确切缩进（制表符/空格）。行号前缀格式为：空格 + 行号 + 制表符。制表符之后的所有内容都是要匹配的实际文件内容。永远不要在 old_string 或 new_string 中包含行号前缀的任何部分。
+- 始终优先编辑现有文件。除非明确要求，否则永远不要写入新文件。
+- 仅在用户明确请求时使用表情符号。除非被要求，否则避免向文件添加表情符号。
+- 如果 `old_string` 在文件中不唯一，编辑将失败。要么提供更大的字符串和更多周围上下文使其唯一，要么使用 `replace_all` 更改 `old_string` 的每个实例。
+- 使用 `replace_all` 在整个文件中替换和重命名字符串。如果您想重命名变量，此参数很有用。"""
 
-WRITE_FILE_TOOL_DESCRIPTION = """Writes to a file in the local filesystem.
+WRITE_FILE_TOOL_DESCRIPTION = """向本地文件系统中的文件写入内容。
 
-Usage:
-- The file_path parameter must be an absolute path, not a relative path
-- The content parameter must be a string
-- The write_file tool will create the a new file.
-- Prefer to edit existing files over creating new ones when possible."""
+用法：
+- file_path 参数必须是绝对路径，而不是相对路径
+- content 参数必须是字符串
+- write_file 工具将创建一个新文件。
+- 在可能的情况下，优先编辑现有文件而不是创建新文件。"""
 
 WRITE_TODOS_SYSTEM_PROMPT = """## `write_todos`
 
-You have access to the `write_todos` tool to help you manage and plan complex objectives. 
-Use this tool for complex objectives to ensure that you are tracking each necessary step and giving the user visibility into your progress.
-This tool is very helpful for planning complex objectives, and for breaking down these larger complex objectives into smaller steps.
+您可以访问 `write_todos` 工具来帮助您管理和规划复杂目标。
+对于复杂目标使用此工具，以确保您跟踪每个必要步骤并让用户了解您的进度。
+此工具对于规划复杂目标以及将这些更大的复杂目标分解为更小的步骤非常有帮助。
 
-It is critical that you mark todos as completed as soon as you are done with a step. Do not batch up multiple steps before marking them as completed.
-For simple objectives that only require a few steps, it is better to just complete the objective directly and NOT use this tool.
-Writing todos takes time and tokens, use it when it is helpful for managing complex many-step problems! But not for simple few-step requests.
+一旦完成一个步骤，立即将待办事项标记为已完成是至关重要的。不要在标记为已完成之前批量处理多个步骤。
+对于只需要几个步骤的简单目标，最好直接完成目标而不使用此工具。
+编写待办事项需要时间和令牌，在有助于管理复杂的多步骤问题时使用它！但不要用于简单的少步骤请求。
 
-## Important To-Do List Usage Notes to Remember
-- The `write_todos` tool should never be called multiple times in parallel.
-- Don't be afraid to revise the To-Do list as you go. New information may reveal new tasks that need to be done, or old tasks that are irrelevant."""
+## 要记住的重要待办事项列表使用说明
+- `write_todos` 工具永远不应该并行调用多次。
+- 不要害怕在进行过程中修订待办事项列表。新信息可能会揭示需要完成的新任务，或者不再相关的旧任务。"""
 
-TASK_SYSTEM_PROMPT = """## `task` (subagent spawner)
+TASK_SYSTEM_PROMPT = """## `task`（子代理生成器）
 
-You have access to a `task` tool to launch short-lived subagents that handle isolated tasks. These agents are ephemeral — they live only for the duration of the task and return a single result.
+您可以访问 `task` 工具来启动处理独立任务的短期子代理。这些代理是临时的——它们只在任务持续期间存在并返回单个结果。
 
-When to use the task tool:
-- When a task is complex and multi-step, and can be fully delegated in isolation
-- When a task is independent of other tasks and can run in parallel
-- When a task requires focused reasoning or heavy token/context usage that would bloat the orchestrator thread
-- When sandboxing improves reliability (e.g. code execution, structured searches, data formatting)
-- When you only care about the output of the subagent, and not the intermediate steps (ex. performing a lot of research and then returned a synthesized report, performing a series of computations or lookups to achieve a concise, relevant answer.)
+何时使用任务工具：
+- 当任务复杂且多步骤，并且可以完全独立委托时
+- 当任务独立于其他任务并且可以并行运行时
+- 当任务需要专注推理或大量令牌/上下文使用，这会使编排器线程臃肿时
+- 当沙盒化提高可靠性时（例如代码执行、结构化搜索、数据格式化）
+- 当您只关心子代理的输出，而不关心中间步骤时（例如执行大量研究然后返回综合报告，执行一系列计算或查找以获得简洁、相关的答案。）
 
-Subagent lifecycle:
-1. **Spawn** → Provide clear role, instructions, and expected output
-2. **Run** → The subagent completes the task autonomously
-3. **Return** → The subagent provides a single structured result
-4. **Reconcile** → Incorporate or synthesize the result into the main thread
+子代理生命周期：
+1. **生成** → 提供清晰的角色、指令和预期输出
+2. **运行** → 子代理自主完成任务
+3. **返回** → 子代理提供单个结构化结果
+4. **整合** → 将结果合并或综合到主线程中
 
-When NOT to use the task tool:
-- If you need to see the intermediate reasoning or steps after the subagent has completed (the task tool hides them)
-- If the task is trivial (a few tool calls or simple lookup)
-- If delegating does not reduce token usage, complexity, or context switching
-- If splitting would add latency without benefit
+何时不使用任务工具：
+- 如果您需要在子代理完成后查看中间推理或步骤（任务工具会隐藏它们）
+- 如果任务很简单（几个工具调用或简单查找）
+- 如果委托不会减少令牌使用、复杂性或上下文切换
+- 如果拆分会增加延迟而没有好处
 
-## Important Task Tool Usage Notes to Remember
-- Whenever possible, parallelize the work that you do. This is true for both tool_calls, and for tasks. Whenever you have independent steps to complete - make tool_calls, or kick off tasks (subagents) in parallel to accomplish them faster. This saves time for the user, which is incredibly important.
-- Remember to use the `task` tool to silo independent tasks within a multi-part objective.
-- You should use the `task` tool whenever you have a complex task that will take multiple steps, and is independent from other tasks that the agent needs to complete. These agents are highly competent and efficient."""
+## 要记住的重要任务工具使用说明
+- 尽可能并行化您所做的工作。这对于工具调用和任务都是如此。每当您有独立的步骤要完成时——进行工具调用，或并行启动任务（子代理）以更快地完成它们。这为用户节省时间，这非常重要。
+- 记住使用 `task` 工具在多部分目标中隔离独立任务。
+- 每当您有一个需要多个步骤的复杂任务，并且独立于代理需要完成的其他任务时，您应该使用 `task` 工具。这些代理非常有能力且高效。"""
 
-FILESYSTEM_SYSTEM_PROMPT = """## Filesystem Tools `ls`, `read_file`, `write_file`, `edit_file`
+FILESYSTEM_SYSTEM_PROMPT = """## 文件系统工具 `ls`、`read_file`、`write_file`、`edit_file`
 
-You have access to a local, private filesystem which you can interact with using these tools.
-- ls: list all files in the local filesystem
-- read_file: read a file from the local filesystem
-- write_file: write to a file in the local filesystem
-- edit_file: edit a file in the local filesystem"""
+您可以访问本地私有文件系统，可以使用这些工具与其交互。
+- ls：列出本地文件系统中的所有文件
+- read_file：从本地文件系统读取文件
+- write_file：向本地文件系统中的文件写入内容
+- edit_file：编辑本地文件系统中的文件"""
 
 BASE_AGENT_PROMPT = """
-In order to complete the objective that the user asks of you, you have access to a number of standard tools.
+为了完成用户要求您完成的目标，您可以访问许多标准工具。
 """
