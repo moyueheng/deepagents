@@ -1,5 +1,5 @@
-from langchain_anthropic import ChatAnthropic
-
+from langchain_openai import ChatOpenAI
 
 def get_default_model():
-    return ChatAnthropic(model_name="claude-sonnet-4-20250514", max_tokens=64000)
+    import os
+    return ChatOpenAI(model_name="qwen-max", base_url="https://dashscope.aliyuncs.com/compatible-mode/v1", api_key=os.getenv("DASHSCOPE_API_KEY"))
